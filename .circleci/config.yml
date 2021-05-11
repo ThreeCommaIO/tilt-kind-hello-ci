@@ -1,0 +1,14 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.16
+      - image: tiltdev/tilt:latest
+
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 19.03.12
+      - run: ls -all
+      - run: make # pull and build dependencies for the project
+      # - run: ctlptl create cluster kind --registry=ctlptl-registry && test/test.sh
