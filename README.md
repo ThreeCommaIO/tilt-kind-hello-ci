@@ -15,6 +15,7 @@ This example project has the structure for spinning up kind, integrating tilt, d
 ## Authors
 
 - [@chrisgoffinet](https://www.github.com/chrisgoffinet)
+- [@timbrammer910](https://www.github.com/timbrammer910)
 
 ## Contributing
 
