@@ -2,13 +2,18 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/golang:1.16
       - image: tiltdev/tilt:latest
 
     steps:
       - checkout
       - setup_remote_docker:
-          version: 19.03.12
-      - run: ls -all
-      - run: make # pull and build dependencies for the project
-      # - run: ctlptl create cluster kind --registry=ctlptl-registry && test/test.sh
+          version: 20.10.2
+      - run:
+          name: Create kind cluster and run tilt
+          command: |
+            scripts/create-cluster.sh
+            scripts/tilt.sh
+      - run:
+          name: Teardown kind cluster
+          when: always
+          command: scripts/teardown-cluster.sh

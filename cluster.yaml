@@ -2,4 +2,3 @@ apiVersion: ctlptl.dev/v1alpha1
 kind: Cluster
 product: kind
 registry: ctlptl-test-registry
-name: kind-kind

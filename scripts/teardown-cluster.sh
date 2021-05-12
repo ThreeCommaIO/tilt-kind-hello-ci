@@ -2,13 +2,9 @@
 # delete the cluster on cleanup
 set -ex
 
-cat <<EOF | ctlptl delete -f -
-apiVersion: ctlptl.dev/v1alpha1
-kind: Cluster
-product: kind
-registry: ctlptl-registry
----
-apiVersion: ctlptl.dev/v1alpha1
-kind: Registry
-name: ctlptl-registry
-EOF
+if [[ $CIRCLE_SHELL_ENV == *"localbuild"* ]]; then
+  echo "Skipping teardown, local circleci build"
+else
+  ctlptl delete --ignore-not-found -f registry.yaml
+  ctlptl delete --ignore-not-found -f cluster.yaml
+fi
